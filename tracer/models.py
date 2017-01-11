@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
@@ -14,12 +15,39 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 class Dream(models.Model):
-    #TODO RATING_CHOICES
-    user = models.ManyToOneField(User)
+    BLISS = '1'
+    GOOD = '2'
+    NEUTRAL = '3'
+    BAD = '4'
+    NIGHTMARE = '5'
+    RATING_CHOICES=(
+        (BLISS, 'Bliss'),
+        (GOOD, 'Good'),
+        (NEUTRAL, 'Neutral'),
+        (BAD, 'Bad'),
+        (NIGHTMARE, 'Nightmare'),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=4000)
-    rating = CharField(max_length=1, choices=RATING_CHOICES)
-    Locations= #TODO tuples?
-    themes= #TODO tuples?
+    rating = models.CharField(max_length=1, choices=RATING_CHOICES)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+class Locations(models.Model):
+    dream = models.ManyToManyField(Dream)
+    location = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.location
+
+class Themes(models.Model):
+    dream = models.ManyToManyField(Dream)
+    theme = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.theme
 
 post_save.connect(create_profile, sender=User)
