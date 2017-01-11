@@ -31,14 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'tracer',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tracer',
-)
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -101,3 +103,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#django registration redux settings
+ACCOUNT_ACTIVATION_DAYS=3
+REGISTRATION_AUTO_LOGIN=True
+
+#email server settings
+ALLOWED_HOSTS = []
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dreamtracerrobot@gmail.com'
+EMAIL_HOST_PASSWORD = 'dreamtraceradmin?'
+EMAIL_PORT = 587
