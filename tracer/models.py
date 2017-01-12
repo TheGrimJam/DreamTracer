@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.db.models.signals import post_save
+from taggit.managers import TaggableManager
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -38,14 +39,14 @@ class Dream(models.Model):
 
 class Locations(models.Model):
     dream = models.ManyToManyField(Dream)
-    location = models.CharField(max_length=50)
+    location = TaggableManager()
 
     def __str__(self):
         return self.location
 
 class Themes(models.Model):
     dream = models.ManyToManyField(Dream)
-    theme = models.CharField(max_length=50)
+    theme = TaggableManager()
 
     def __str__(self):
         return self.theme

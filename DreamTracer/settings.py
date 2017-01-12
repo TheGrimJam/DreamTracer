@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'tracer',
     'registration',
+    'taggit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -116,3 +117,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'dreamtracerrobot@gmail.com'
 EMAIL_HOST_PASSWORD = 'dreamtraceradmin?'
 EMAIL_PORT = 587
+
+#django taggit settings
+TAGGIT_CASE_INSENSITIVE = True
