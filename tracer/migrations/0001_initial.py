@@ -22,23 +22,9 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(max_length=4000)),
                 ('rating', models.CharField(max_length=1, choices=[(b'1', b'Bliss'), (b'2', b'Good'), (b'3', b'Neutral'), (b'4', b'Bad'), (b'5', b'Nightmare')])),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Locations',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dream', models.ManyToManyField(to='tracer.Dream')),
-                ('location', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', help_text='A comma-separated list of tags.', verbose_name='Tags')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Themes',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('dream', models.ManyToManyField(to='tracer.Dream')),
+                ('location', models.CharField(max_length=50)),
                 ('theme', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', help_text='A comma-separated list of tags.', verbose_name='Tags')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(

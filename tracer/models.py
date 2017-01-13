@@ -33,22 +33,11 @@ class Dream(models.Model):
     description = models.TextField(max_length=4000)
     rating = models.CharField(max_length=1, choices=RATING_CHOICES)
     date = models.DateTimeField(auto_now_add=True, blank=True)
+    location = models.CharField(max_length=50)
+    theme = TaggableManager()
 
     def __str__(self):
         return self.title
 
-class Locations(models.Model):
-    dream = models.ManyToManyField(Dream)
-    location = TaggableManager()
-
-    def __str__(self):
-        return self.location
-
-class Themes(models.Model):
-    dream = models.ManyToManyField(Dream)
-    theme = TaggableManager()
-
-    def __str__(self):
-        return self.theme
 
 post_save.connect(create_profile, sender=User)
