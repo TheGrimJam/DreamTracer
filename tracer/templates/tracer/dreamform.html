@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="/newdream/" method="POST">
+        {% csrf_token %}
+        {{form.non_form_errors}}
+        <div class="ui form">
+            <div class="field{% if form.title.errors %} error {% endif %}">
+                <label for="title">{{form.title.label}}</label>
+                <div class="ui input">
+                    {{form.title}}
+                </div>
+            </div>
+            <div class="field{% if form.description.errors %} error {% endif %}">
+                <label for="description">{{form.description.label}}</label>
+                {{form.description}}
+            </div>
+            <div class="field{% if form.rating.errors %} error {% endif %}">
+                <label for="rating">{{form.rating.label}}</label>
+                {{form.rating}}
+            </div>
+            <div class="two fields">
+                <div class="field{% if form.location.errors %} error {% endif %}">
+                    <label for="location">{{form.location.label}}</label>
+                    {{form.location}}
+                </div>
+                <div class="field{% if form.theme.errors %} error {% endif %}">
+                    <label for="theme">{{form.theme.label}}</label>
+                    {{form.theme}}
+                </div>
+            </div>
+            <div class="field{% if form.date.errors %} error {% endif %}">
+                <label for="theme">{{form.date.label}}</label>
+                <div class="fields">
+                    {{form.date}}
+                </div>
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        $('.dropdown').dropdown();
+        $("#id_theme").attr("placeholder", "Enter theme tags, group phrases with quotes.");
+    </script>
+{% endblock %}

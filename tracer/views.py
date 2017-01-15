@@ -6,7 +6,7 @@ from tracer.forms import DreamForm
 from tracer.models import Dream
 
 def dreamform(request):
-    template = loader.get_template('dreamform.html')
+    template = loader.get_template('tracer/dreamform.html')
     if request.method=="POST":
         form = DreamForm(request.POST)
         context = {'form': form}
