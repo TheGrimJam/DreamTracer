@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+import datetime
 from django.db.models.signals import post_save
 from taggit.managers import TaggableManager
 
@@ -32,9 +32,12 @@ class Dream(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=4000)
     rating = models.CharField(max_length=1, choices=RATING_CHOICES)
-    date = models.DateTimeField(auto_now_add=True, blank=True)
+    date = models.DateField(auto_now_add=False, blank=True)
     location = models.CharField(max_length=50)
-    theme = TaggableManager()
+    theme = TaggableManager(verbose_name="Themes")
+
+    def rating_verbose(self):
+        return dict(Dream.RATING_CHOICES)[self.rating]
 
     def __str__(self):
         return self.title

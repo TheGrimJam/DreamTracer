@@ -15,12 +15,14 @@ def dreamform(request):
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             rating = form.cleaned_data['rating']
+            date = form.cleaned_data['date']
             location = form.cleaned_data['location']
             theme_tags = form.cleaned_data['theme']
             dream_instance = Dream(
                 user=user,
                 title=title,
                 description=description,
+                date=date,
                 rating=rating,
                 location=location,
             )
@@ -31,4 +33,10 @@ def dreamform(request):
     else:
         form = DreamForm()
         context = {'form': form}
+    return HttpResponse(template.render(context , request))
+
+def userdreams(request):
+    template = loader.get_template('tracer/userdreams.html')
+    dreams_query = Dream.objects.filter(user=request.user).order_by('-date')
+    context = {'dreams_query': dreams_query}
     return HttpResponse(template.render(context , request))

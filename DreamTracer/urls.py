@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('registration.backends.default.urls')),
     url(r'^newdream/$', views.dreamform, name='newdream'),
+    url(r'^mydreams/$', views.userdreams, name='userdreams'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for dream in dreams_query %}
+    <div class="ui padded top attached segment">
+        <div class="ui ribbon label">{{dream.rating_verbose}}</div>
+        <span style="font-size:20">
+            {{dream.title}}
+        </span>
+        <p>
+            <br>
+            {{dream.description}}
+        </p>
+        <div class="ui bottom left attached label">
+            Location:&nbsp;&nbsp;{{dream.location}}
+        </div>
+        <div class="ui bottom right attached label">
+            Date:&nbsp;&nbsp;{{dream.date}}
+        </div>
+    </div>
+    <div class="ui bottom attached padded message" style="font-size:13">
+        {{dream.theme.names}}
+    </div>
+
+{% endfor %}
+
+{% endblock %}
