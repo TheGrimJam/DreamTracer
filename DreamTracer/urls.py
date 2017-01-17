@@ -17,10 +17,13 @@ from django.contrib import admin
 from tracer import views
 from django.conf.urls.static import static
 from django.conf import settings
+from tracer import views as traceviews
 
 urlpatterns = [
+    url(r'^$', include('traceviews.index')),          # Make an index page or just route it to something existing
+    url(r'^chatbot/', include('tracer.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('registration.backends.default.urls')),
-    url(r'^newdream/$', views.dreamform, name='newdream'),
-    url(r'^mydreams/$', views.userdreams, name='userdreams'),
+    url(r'^newdream/$', views.dreamform, name='newdream'),      # Move these guys to tracer/urls.py
+    url(r'^mydreams/$', views.userdreams, name='userdreams'),   
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
