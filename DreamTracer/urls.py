@@ -21,9 +21,12 @@ from tracer import views as traceviews
 
 urlpatterns = [
     url(r'^$', include('traceviews.index')),          # Make an index page or just route it to something existing
-    url(r'^chatbot/', include('tracer.urls')),
+    url(r'^dreams/', include('tracer.urls')),         # Create a urls.py in tracer
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('registration.backends.default.urls')),
     url(r'^newdream/$', views.dreamform, name='newdream'),      # Move these guys to tracer/urls.py
     url(r'^mydreams/$', views.userdreams, name='userdreams'),   
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# Naming scheme following something like - all "dreams" related things are in sub URLs of "www.things.com/dreams/" i.e "/dreams/add", "/dreams/edit
