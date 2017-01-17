@@ -19,7 +19,10 @@
         </div>
     </div>
     <div class="ui bottom attached padded message" style="font-size:13">
-        {{dream.theme.names}}
+            {% for name in dream.theme.names.all %}
+                <div class="ui button">{{ name }}</div> 
+            {% endfor %}
+
     </div>
 
 {% endfor %}
